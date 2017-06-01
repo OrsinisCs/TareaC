@@ -132,17 +132,61 @@ namespace Tarea
         private void btnWithDraw_Click(object sender, EventArgs e)
         {
             tabControl1.SelectTab(3);
+            aux.Text = Properties.Settings.Default.Capital;
         }
 
         private void btn2000_Click(object sender, EventArgs e)
         {
-
+            WithDraw(2000);
         }
 
 
         private void WithDraw(Double cantidad)
         {
             double balance = double.Parse(aux.Text);
+
+            if (balance >= cantidad)
+            {
+                double z = balance - cantidad;
+                Properties.Settings.Default.Capital = Convert.ToString(z);
+                Properties.Settings.Default.Save();
+                MessageBox.Show("Por favor, Retire su dinero", "Retirando dinero", MessageBoxButtons.OK);
+
+            }
+
+            else
+            {
+                MessageBox.Show("No posee fondos suficientes, intente con otra cantidad");
+            }
+        }
+
+        private void btn500_Click(object sender, EventArgs e)
+        {
+            WithDraw(500);
+        }
+
+        private void btn1000_Click(object sender, EventArgs e)
+        {
+            WithDraw(1000);
+        }
+
+        private void btn300_Click(object sender, EventArgs e)
+        {
+            WithDraw(300);
+        }
+
+        private void btn100_Click(object sender, EventArgs e)
+        {
+            WithDraw(100);
+        }
+
+        private void btnOther_Click(object sender, EventArgs e)
+        {
+
+            String request = Microsoft.VisualBasic.Interaction.InputBox("Ingrese otra cantidad", "Otra cantidad", "0");
+            double money = double.Parse(request);
+            MessageBox.Show("" + money);
+            WithDraw(money);
         }
     }
 }
